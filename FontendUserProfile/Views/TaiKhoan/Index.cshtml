@@ -1,0 +1,46 @@
+@{
+    Layout = "_MainLayout";
+    ViewData["HeadTitle"]="Trang cá nhân";
+}
+@model PhuKienDienThoai.Models.AccountViewModels.UserViewModel
+<h2 class="heading">Thông tin tài khoản</h2>
+@if(@TempData["Message"]!=null)
+{<div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Thông báo</strong> @TempData["Message"]
+</div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="CapNhatTaiKhoan" method="post">
+            <div class="form-group col-md-6 nopadding">
+                <label asp-for="HoTen"></label>
+                <input asp-for="HoTen" class="form-control" style="width:98%">
+            </div>
+            <div class="form-group col-md-6 nopadding">
+                <label asp-for="Email"></label> (chỉ xem)
+                <input asp-for="Email" class="form-control" readonly>
+            </div>
+            <fieldset class="form-group">
+                <label>Giới tính</label>    
+                <label for="GioiTinhNam" class="radio-inline">Nam</label>
+                <input type="radio" value="true" name="GioiTinh" @((Model.GioiTinh==true)?"checked":"") id="GioiTinhNam">
+                <label for="GioiTinhNu" class="radio-inline">Nữ</label>
+                <input type="radio" value="false" name="GioiTinh"  @((Model.GioiTinh==false)?"checked":"") id="GioiTinhNu">
+            </fieldset>
+            <div class="form-group">
+                <label asp-for="NgaySinh"></label> (tháng/ngày/năm)
+                <input type="date" class="form-control" asp-for="NgaySinh">
+            </div>   
+            <div class="form-group">
+                <label asp-for="DiaChi"></label>
+                <input class="form-control" type="text" asp-for="DiaChi">
+            </div>     
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input class="form-control" type="tel" asp-for="PhoneNumber">
+            </div>         
+            <input type="submit" class="btn pull-right add-to-cart" value="Cập nhật tài khoản">      
+        </form>  
+    </div>
+</div>

@@ -1,0 +1,47 @@
+@{
+    Layout="_MainLayout";
+    ViewData["HeadTitle"]="Quản lý đơn hàng";
+}
+@model List<PhuKienDienThoai.Models.ChiTietHoaDon>
+<section id="cart_items">
+    <div class="table-responsive cart_info">
+        <table class="table table-condensed" style="margin-bottom: auto">
+            <thead>
+                <tr class="cart_menu">
+                    <td class="image">Mã sản phẩm</td>
+                    <td>Tên sản phẩm</td>
+                    <td class="">Số lượng</td>
+                    <td class="">Thành tiền</td>
+                </tr>
+            </thead>
+            <tbody> 
+                @if(@model.Count() > 0)
+                {
+                    foreach(var item in Model)
+                    {
+                        <tr>
+                            <td class="cart_price text-center">
+                                <p><a href="~/SanPham/Index/@item.SanPham.id">#@item.SanPham.id</a></p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@item.SanPham.TenSanPham</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@item.SoLuong</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@item.ThanhTien</p>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">Bạn chưa đặt hàng lần nào</td>
+                    </tr>   
+                }    
+            </tbody>
+        </table>
+    </div>
+</section>

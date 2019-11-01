@@ -1,0 +1,57 @@
+@{
+    Layout="_MainLayout";
+    ViewData["HeadTitle"]="Wishlist";
+}
+@model List<PhuKienDienThoai.Models.Wishlist>
+<h3>Wishlist của tôi</h3> 
+@if(Model.Count >0)
+{
+    <section id="cart_items">
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed" style="margin-bottom:0px ">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Item</td>
+                        <td class="description">Tên sản phẩm</td>
+                        <td>Tình trạng</td>
+                        <td>Xóa</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                <img src="~/images/SanPham/@item.SanPham.HinhAnh" style="max-height:100px" alt="Ảnh của @item.SanPham.TenSanPham">
+                            </td>
+                            <td class="cart_description" style="width: 250px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                                <h4><a asp-controller="SanPham" asp-action="Index" asp-route-id="@item.SanPham.id" asp-area="">@item.SanPham.TenSanPham</a></h4>
+                                <p>ID sản phẩm: @item.SanPham.id</p>
+                                <p>Đơn giá: @item.SanPham.DonGia.ToString("#,0")Đ</p>
+                            </td>
+                            <td class="cart_price">
+                               @((item.SanPham.SoLuong>0)?"Còn hàng":"Hết hàng")
+                            </td>
+                            <td class="cart_delete">
+                                <a title="Xóa khỏi wishlist" class="cart_quantity_delete" asp-area="Users" asp-route-id="@item.SanPham.id" asp-action="XoaKhoiWishList" asp-controller="Wishlist"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+}
+else
+{
+    <section id="cart_items">
+        <div class="container">
+    <h3>
+        Bạn chưa có món hàng nào trong wishlist
+    </h3>
+    
+    <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-default add-to-cart" >Trở về trang chủ</a>
+    </div>  
+    </section>
+}
